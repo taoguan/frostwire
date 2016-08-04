@@ -24,8 +24,6 @@ import android.support.v4.provider.DocumentFile;
 import com.frostwire.android.gui.Librarian;
 import com.frostwire.android.gui.NetworkManager;
 import com.frostwire.jlibtorrent.LibTorrent;
-import com.frostwire.jlibtorrent.swig.posix_stat;
-import com.frostwire.jlibtorrent.swig.posix_wrapper;
 import com.frostwire.util.Logger;
 import com.frostwire.platform.*;
 
@@ -110,7 +108,8 @@ public final class AndroidPlatform extends AbstractPlatform {
 
         if (Build.VERSION.SDK_INT >= VERSION_CODE_LOLLIPOP) {
             LollipopFileSystem lfs = new LollipopFileSystem(app);
-            LibTorrent.setPosixWrapper(new PosixCalls(lfs));
+            // POSIX
+            //LibTorrent.setPosixWrapper(new PosixCalls(lfs));
             fs = lfs;
         } else {
             fs = new DefaultFileSystem() {
@@ -124,6 +123,8 @@ public final class AndroidPlatform extends AbstractPlatform {
         return fs;
     }
 
+    // POSIX
+    /*
     private static final class PosixCalls extends posix_wrapper {
 
         private final LollipopFileSystem fs;
@@ -229,5 +230,5 @@ public final class AndroidPlatform extends AbstractPlatform {
 
             return r;
         }
-    }
+    }*/
 }

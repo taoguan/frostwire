@@ -86,6 +86,11 @@ android {
         jackOptions {
             enabled false
         }
+
+        ndk {
+            moduleName 'posix_wrapper'
+            abiFilters 'armeabi-v7a', 'x86'
+        }
     }
 
     compileOptions {
@@ -99,12 +104,8 @@ android {
             res.srcDirs = ['res', 'apollo/res']
             aidl.srcDirs = ['src', 'apollo/src']
             assets.srcDirs = ['assets']
-            java {
-                srcDir '../common/src/main/java'
-
-                srcDir 'apollo/src'
-                srcDir 'src'
-            }
+            java.srcDirs = ['../common/src/main/java', 'apollo/src', 'src']
+            jni.srcDirs = ['jni']
         }
 
         plus1.res.srcDirs = ['res-plus1']

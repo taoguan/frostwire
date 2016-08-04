@@ -316,7 +316,8 @@ public final class BTEngine {
             sp.activeDownloads(4);
             sp.activeSeeds(4);
             sp.setMaxPeerlistSize(200);
-            sp.setGuidedReadCache(true);
+            // LIBTORRENT
+            //sp.setGuidedReadCache(true);
             sp.setTickInterval(1000);
             sp.setInactivityTimeout(60);
             sp.setSeedingOutgoingConnections(false);
@@ -463,7 +464,8 @@ public final class BTEngine {
         }
 
         final sha1_hash info_hash = p.getInfo_hash();
-        String sha1 = info_hash.to_hex();
+        // LIBTORRENT
+        String sha1 = null;//info_hash.to_hex();
 
         byte[] data = MAGNET_CACHE.get(sha1);
         if (data != null) {
@@ -691,6 +693,8 @@ public final class BTEngine {
 
     private void onListenSucceeded(ListenSucceededAlert alert) {
         try {
+            // LIBTORRENT
+            /*
             TcpEndpoint endp = alert.getEndpoint();
             if (alert.getSocketType() == ListenSucceededAlert.SocketType.TCP) {
                 String address = endp.address().toString();
@@ -699,17 +703,18 @@ public final class BTEngine {
             }
 
             String s = "endpoint: " + endp + " type:" + alert.getSocketType();
-            LOGGER.info("Listen succeeded on " + s);
+            LOGGER.info("Listen succeeded on " + s);*/
         } catch (Throwable e) {
             LOGGER.error("Error adding listen endpoint to internal list", e);
         }
     }
 
     private void onListenFailed(ListenFailedAlert alert) {
-        TcpEndpoint endp = alert.endpoint();
+        // LIBTORRENT
+        /*TcpEndpoint endp = alert.endpoint();
         String s = "endpoint: " + endp + " type:" + alert.getSocketType();
         String message = alert.getError().message();
-        LOGGER.info("Listen failed on " + s + " (error: " + message + ")");
+        LOGGER.info("Listen failed on " + s + " (error: " + message + ")");*/
     }
 
     private void migrateVuzeDownloads() {
@@ -822,7 +827,8 @@ public final class BTEngine {
     }
 
     private TorrentHandle addTorrentSupport(TorrentInfo ti, File saveDir, Priority[] priorities, File resumeFile, boolean async, String magnetUrlParams) {
-
+// LIBTORRENT
+        /*
         String savePath = null;
         if (saveDir != null) {
             savePath = saveDir.getAbsolutePath();
@@ -874,7 +880,8 @@ public final class BTEngine {
             error_code ec = new error_code();
             torrent_handle th = session.swig().add_torrent(p, ec);
             return new TorrentHandle(th);
-        }
+        }*/
+        return null;
     }
 
     // this is here until we have a properly done OS utils.
